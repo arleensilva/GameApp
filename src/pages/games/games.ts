@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
+import { Nintendo } from '../../providers/nintendo-eshop/nintendo.model'
 
 /**
  * Generated class for the GamesPage page.
@@ -15,8 +16,8 @@ import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-e
 })
 export class GamesPage {
 
-  game: any[]=[];
-  gameList: any[]=[];
+  game: Nintendo[]=[];
+  gameList: Nintendo[]=[];
   myInput: string;
 
 
