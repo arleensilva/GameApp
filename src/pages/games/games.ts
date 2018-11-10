@@ -15,20 +15,40 @@ import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-e
 })
 export class GamesPage {
 
+  game: any[]=[];
   gameList: any[]=[];
+  myInput: string;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private nintendoService:NintendoEshopProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GamesPage');
     this.getGameList();
+  }
+
+  onInput(event){
+    if (this.myInput != '')
+      this.gameList = this.game.filter((element, index, array) => element.title.toLocaleUpperCase().includes(this.myInput.toLocaleUpperCase()) ? element : false)
+      else {
+        this.gameList = [];
+        this.randomGame();
+      }
+  }
+
+  randomGame(){
+    for(let i= 0; i < 10; i++){
+      this.gameList.push(this.game[Math.trunc(Math.random()*this.game.length)])
+    }
   }
 
   getGameList(){
     this.nintendoService.getGamesAmerica()
-      .then(data => this.gameList = data)
+      .then(data => {
+        this.game = data;
+        this.randomGame();
+      })
   }
 
 }

@@ -17,16 +17,40 @@
 
 
 <ion-content padding>
+<ion-content *ngIf="game.lenght">
+  <h1>tesre</h1>
+</ion-content>
+  <ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+  <ion-grid>
+      <ion-row *ngFor="let game of gameList">
+        <ion-col col-6><img [src]="game.front_box_art"/></ion-col>
+        <ion-col col-6>
+          <span class="place-info-box-text">{{game.title}}</span>
+          <button ion-button icon-start color="secondary" round>
+              <ion-icon name="game-controller-a"></ion-icon>
+              Add
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+
+
+<!--
+
+
+
+<ion-content padding>
   <ion-card *ngFor="let game of gameList">
-    <img [src]="game.front_box_art"/>
-    <ion-card-content>
-      <ion-card-title>
-        {{game.title}}
-        </ion-card-title>
-      <p>
-        The most popular industrial group ever, and largely
-        responsible for bringing the music to a mass audience.
-      </p>
+    <ion-card-content class="place-info-box">
+      <span class="place-info-box-icon"><img [src]="game.front_box_art"/></span>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+-->
