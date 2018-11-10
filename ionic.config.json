@@ -1,7 +1,5 @@
 {
-  "name": "GameApp",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
+  "name": "game-app",
+  "integrations": {},
+  "type": "ionic-angular"
 }
