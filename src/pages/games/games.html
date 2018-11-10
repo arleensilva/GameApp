@@ -17,5 +17,16 @@
 
 
 <ion-content padding>
-    <h3>Teste Game</h3>
+  <ion-card *ngFor="let game of gameList">
+    <img [src]="game.front_box_art"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{game.title}}
+        </ion-card-title>
+      <p>
+        The most popular industrial group ever, and largely
+        responsible for bringing the music to a mass audience.
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

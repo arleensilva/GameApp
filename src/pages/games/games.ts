@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
 
 /**
  * Generated class for the GamesPage page.
@@ -14,11 +15,20 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class GamesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  gameList: any[]=[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private nintendoService:NintendoEshopProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');
+    this.getGameList();
+  }
+
+  getGameList(){
+    this.nintendoService.getGamesAmerica()
+      .then(data => this.gameList = data)
   }
 
 }
