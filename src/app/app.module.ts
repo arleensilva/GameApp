@@ -11,13 +11,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GamesPage } from '../pages/games/games';
 import { NintendoEshopProvider } from '../providers/nintendo-eshop/nintendo-eshop';
 import { HttpClientModule } from '@angular/common/http';
+import { GameDetailPage } from '../pages/game-detail/game-detail';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     GamesPage,
-    ListPage
+    ListPage,
+    GameDetailPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     GamesPage,
-    ListPage
+    ListPage,
+    GameDetailPage
   ],
   providers: [
     StatusBar,

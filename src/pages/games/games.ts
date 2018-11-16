@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
 import { Nintendo } from '../../providers/nintendo-eshop/nintendo.model'
+import { GameDetailPage } from '../game-detail/game-detail';
 
 /**
  * Generated class for the GamesPage page.
@@ -50,6 +51,10 @@ export class GamesPage {
         this.game = data;
         this.randomGame();
       })
+  }
+
+  openGameDetail(game){
+    this.navCtrl.push(GameDetailPage, game)
   }
 
 }
