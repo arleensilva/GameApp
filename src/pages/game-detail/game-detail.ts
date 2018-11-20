@@ -20,11 +20,16 @@ export class GameDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.game = navParams.data;
-    console.log(this.game)
+    //console.log(JSON.stringify(this.game, null, 2))
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GameDetailPage');
+  }
+
+  isArray(value) {
+    return value && typeof value === 'object' && value.constructor === Array;
   }
 
 }

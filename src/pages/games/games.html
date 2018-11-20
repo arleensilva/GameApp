@@ -29,7 +29,7 @@
           {{game.title}}
         </h2>
         <p>
-          description
+          {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
         </p>
       </ion-card-content>
       <ion-row no-padding>

@@ -57,4 +57,8 @@ export class GamesPage {
     this.navCtrl.push(GameDetailPage, game)
   }
 
+  isArray(value) {
+    return value && typeof value === 'object' && value.constructor === Array;
+  }
+
 }

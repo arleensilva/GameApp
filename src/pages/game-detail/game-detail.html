@@ -7,13 +7,53 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>GameDetail</ion-title>
+    <ion-title>{{game.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h1>{{game}}</h1>
+
+  <img [src]="game.front_box_art" />
+  <ion-card-content>
+    <h2 class="card-title">
+      {{game.title}}
+    </h2>
+    <p>
+      {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
+    </p>
+  </ion-card-content>
+  <ion-row no-padding>
+    <ion-col>
+      <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
+        <ion-icon name='star'></ion-icon>
+        Favorite
+      </button>
+    </ion-col>
+    <ion-col text-center>
+      <button ion-button clear small color="danger" icon-left (click)="listen(card)">
+        <ion-icon name='musical-notes'></ion-icon>
+        Listen
+      </button>
+    </ion-col>
+    <ion-col text-right>
+      <button ion-button clear small color="danger" icon-left (click)="share(card)">
+        <ion-icon name='share-alt'></ion-icon>
+        Share
+      </button>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row no padding>
+    Number of players: {{game.number_of_players}}
+  </ion-row>
+  <ion-row no padding>
+    Release date: {{game.release_date}}
+  </ion-row>
+  <ion-row no padding>
+    Eshop Price: ${{game.eshop_price}}
+  </ion-row>
+
 
 </ion-content>

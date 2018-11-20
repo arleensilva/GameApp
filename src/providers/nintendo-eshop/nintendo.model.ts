@@ -1,7 +1,5 @@
 export interface Nintendo{
-    categories: {
-    category: Array<string>
-    },
+    categories: any,
     slug: string,
     buyitnow: boolean,
     release_date: string,
