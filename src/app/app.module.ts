@@ -15,6 +15,7 @@ import { GameDetailPage } from '../pages/game-detail/game-detail';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { firebaseConfig } from '../config';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { LoginPage } from '../pages/login/login';
@@ -35,6 +36,7 @@ import { SignupPage } from '../pages/signup/signup';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig.fire),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

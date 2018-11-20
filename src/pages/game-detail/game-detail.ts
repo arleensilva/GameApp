@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Nintendo } from '../../providers/nintendo-eshop/nintendo.model';
+import { Nintendo } from '../../model/nintendo.model';
 
 /**
  * Generated class for the GameDetailPage page.
