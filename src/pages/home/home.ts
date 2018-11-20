@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 
 @Component({
   selector: 'page-home',
@@ -8,15 +9,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class HomePage {
 
-  // site = {
-  //   url: 'grokonez.com',
-  //   description: 'Java Technology - Spring Framework'
-  // };
+  user = {nome: 'teste'}
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public db: AngularFireDatabase) {
-      //this.db.list('site').push(this.site)
+    public db: DatabaseServiceProvider) {
+      db.save(this.user)
       console.log('teste')
       console.log(this.navParams.data)
 
