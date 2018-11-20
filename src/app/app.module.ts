@@ -13,18 +13,28 @@ import { NintendoEshopProvider } from '../providers/nintendo-eshop/nintendo-esho
 import { HttpClientModule } from '@angular/common/http';
 import { GameDetailPage } from '../pages/game-detail/game-detail';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { firebaseConfig } from '../config';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     GamesPage,
     ListPage,
-    GameDetailPage
+    GameDetailPage,
+    LoginPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig.fire),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,13 +42,17 @@ import { GameDetailPage } from '../pages/game-detail/game-detail';
     HomePage,
     GamesPage,
     ListPage,
-    GameDetailPage
+    GameDetailPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NintendoEshopProvider
+    NintendoEshopProvider,
+    AngularFireAuth,
+    AuthServiceProvider,
+    SignupPage
   ]
 })
 export class AppModule {}
