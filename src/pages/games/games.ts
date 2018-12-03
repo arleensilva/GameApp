@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
 import { Nintendo } from '../../model/nintendo.model'
 import { GameDetailPage } from '../game-detail/game-detail';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 
 /**
  * Generated class for the GamesPage page.
@@ -20,10 +22,16 @@ export class GamesPage {
   game: Nintendo[]=[];
   gameList: Nintendo[]=[];
   myInput: string;
+  userFirebase: any
+  user: any
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private nintendoService:NintendoEshopProvider) {
+    private nintendoService:NintendoEshopProvider,
+    public afAuth: AngularFireAuth,
+    public db: DatabaseServiceProvider) {
+      let userFirebase = afAuth.auth.currentUser
+      db.get(userFirebase.uid).subscribe(data => this.user = data)
   }
 
   ionViewDidLoad() {
@@ -59,6 +67,15 @@ export class GamesPage {
 
   isArray(value) {
     return value && typeof value === 'object' && value.constructor === Array;
+  }
+
+  addMyGame(game){
+    if(!this.user.games){
+      this.user.games = []
+    }
+    this.user.games.push(game)
+    this.db.save(this.user)
+    console.log('salvou')
   }
 
 }

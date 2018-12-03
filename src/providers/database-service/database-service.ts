@@ -41,7 +41,7 @@ export class DatabaseServiceProvider {
     return new Promise((resolve, reject) => {
       if(user.key){
         this.db.object(this.PATH + user.key)
-          .update({...user})
+          .update({ ...user})
           .then(() => resolve())
           .catch((e) => reject())
       } else {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'page-home',
@@ -9,15 +10,18 @@ import { DatabaseServiceProvider } from '../../providers/database-service/databa
 })
 export class HomePage {
 
-  user = {nome: 'teste'}
+  user = {}
+  
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public db: DatabaseServiceProvider) {
-      db.save(this.user)
-      console.log('teste')
-      console.log(this.navParams.data)
-
+    public db: DatabaseServiceProvider,
+    public afAuth: AngularFireAuth) {
+      let userFirebase = afAuth.auth.currentUser
+      db.get(userFirebase.uid).subscribe(data => {
+        this.user = data
+        console.log(this.user)
+      })
   }
 
 }

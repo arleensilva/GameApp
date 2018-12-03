@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
+import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +27,8 @@ export class LoginPage {
   constructor(
     private navCtrl: NavController, public navParams: NavParams,
     private auth: AuthServiceProvider,
-    fb: FormBuilder
+    fb: FormBuilder,
+    private db: DatabaseServiceProvider
   ) {
     this.loginForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -60,13 +62,28 @@ export class LoginPage {
 
   } 
   
-  loginWithGoogle() {
-    this.auth.signInWithGoogle().then(
-        (data) => this.navCtrl.setRoot(HomePage, data),
-        error => console.log(error.message)
-      );
-  } 
+  // loginWithGoogle() {
+  //   this.auth.signInWithGoogle().then(
+  //       (data) => this.navCtrl.setRoot(HomePage, data),
+  //       error => console.log(error.message)
+  //     );
+  // } 
   
+  loginWithGoogle() {
+    this.auth.signInWithGoogle().then( data => {
+      if(data.additionalUserInfo.isNewUser){
+        this.db.save({key: data.user.uid})
+        this.navCtrl.setRoot(HomePage, data),
+        error => console.log(error.message)
+      } else {
+        this.db.get(data.user.uid).subscribe( user => {
+          this.navCtrl.setRoot(HomePage, user),
+          error => console.log(error.message)
+        })
+      }
+    });
+  } 
+
   signup() {
     this.navCtrl.push(SignupPage);
   }
