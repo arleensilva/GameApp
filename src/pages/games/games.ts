@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
+
 import { Nintendo } from '../../model/nintendo.model'
+
+import { NintendoEshopProvider } from '../../providers/nintendo-eshop/nintendo-eshop';
+
 import { GameDetailPage } from '../game-detail/game-detail';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
@@ -22,16 +25,18 @@ export class GamesPage {
   game: Nintendo[]=[];
   gameList: Nintendo[]=[];
   myInput: string;
-  userFirebase: any
-  user: any
-
+  user: any = {}
+  searching = true
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private nintendoService:NintendoEshopProvider,
+    public nintendoService:NintendoEshopProvider,
     public afAuth: AngularFireAuth,
     public db: DatabaseServiceProvider) {
       let userFirebase = afAuth.auth.currentUser
-      db.get(userFirebase.uid).subscribe(data => this.user = data)
+      db.get(userFirebase.uid).subscribe(data => {
+        this.user = data
+      })
+      
   }
 
   ionViewDidLoad() {
@@ -58,6 +63,7 @@ export class GamesPage {
       .then(data => {
         this.game = data;
         this.randomGame();
+        this.searching = false
       })
   }
 
@@ -75,7 +81,18 @@ export class GamesPage {
     }
     this.user.games.push(game)
     this.db.save(this.user)
-    console.log('salvou')
+  }
+
+  addWishlist(game){
+    if(!this.user.wishlist) this.user.wishlist = []
+
+    this.user.wishlist.push(game)
+    this.db.save(this.user)
+  }
+
+  containGame(gameArray, game){
+    let gameFilter = gameArray.filter(obj => obj.id == game.id)
+    return (gameFilter) ? true : false
   }
 
 }

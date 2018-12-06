@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { getGamesAmerica } from 'nintendo-switch-eshop';
-import { Nintendo } from '../../model/nintendo.model'
 
 /*
   Generated class for the NintendoEshopProvider provider.

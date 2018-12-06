@@ -1,36 +1,43 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { GamesPage } from '../pages/games/games';
-import { NintendoEshopProvider } from '../providers/nintendo-eshop/nintendo-eshop';
+
 import { HttpClientModule } from '@angular/common/http';
+
+import { NintendoEshopProvider } from '../providers/nintendo-eshop/nintendo-eshop';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { DatabaseServiceProvider } from '../providers/database-service/database-service';
+
+import { GamesPage } from '../pages/games/games';
 import { GameDetailPage } from '../pages/game-detail/game-detail';
+import { LoginPage } from '../pages/login/login';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { firebaseConfig } from '../config';
-import { AuthServiceProvider } from '../providers/auth-service/auth-service';
-import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
-import { DatabaseServiceProvider } from '../providers/database-service/database-service';
+import { MyGamesPage } from '../pages/my-games/my-games';
 
 @NgModule({
   declarations: [
     MyApp,
+    AboutPage,
+    ContactPage,
     HomePage,
+    TabsPage,
     GamesPage,
-    ListPage,
     GameDetailPage,
     LoginPage,
-    SignupPage
+    MyGamesPage
   ],
   imports: [
     BrowserModule,
@@ -42,20 +49,22 @@ import { DatabaseServiceProvider } from '../providers/database-service/database-
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AboutPage,
+    ContactPage,
     HomePage,
+    TabsPage,
     GamesPage,
-    ListPage,
     GameDetailPage,
-    LoginPage
+    LoginPage,
+    MyGamesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NintendoEshopProvider,
-    AngularFireAuth,
     AuthServiceProvider,
-    SignupPage,
+    AngularFireAuth,
     DatabaseServiceProvider
   ]
 })

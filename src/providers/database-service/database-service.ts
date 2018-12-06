@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase } from 'angularfire2/database';
-import { User } from '../../model/user.model'
-import { componentFactoryName } from '@angular/compiler';
 
 /*
   Generated class for the DatabaseServiceProvider provider.

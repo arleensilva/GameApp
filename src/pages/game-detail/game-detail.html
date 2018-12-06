@@ -6,54 +6,43 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{game.title}}</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-  <img [src]="game.front_box_art" />
-  <ion-card-content>
-    <h2 class="card-title">
-      {{game.title}}
-    </h2>
-    <p>
-      {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
-    </p>
-  </ion-card-content>
-  <ion-row no-padding>
-    <ion-col>
-      <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
-        <ion-icon name='star'></ion-icon>
-        Favorite
-      </button>
-    </ion-col>
-    <ion-col text-center>
-      <button ion-button clear small color="danger" icon-left (click)="listen(card)">
-        <ion-icon name='musical-notes'></ion-icon>
-        Listen
-      </button>
-    </ion-col>
-    <ion-col text-right>
-      <button ion-button clear small color="danger" icon-left (click)="share(card)">
-        <ion-icon name='share-alt'></ion-icon>
-        Share
-      </button>
-    </ion-col>
-  </ion-row>
+    <ion-navbar>
+      <ion-title>{{game.title}}</ion-title>
+    </ion-navbar>
   
-  <ion-row no padding>
-    Number of players: {{game.number_of_players}}
-  </ion-row>
-  <ion-row no padding>
-    Release date: {{game.release_date}}
-  </ion-row>
-  <ion-row no padding>
-    Eshop Price: ${{game.eshop_price}}
-  </ion-row>
-
-
-</ion-content>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <img [src]="game.front_box_art" />
+    <ion-card-content>
+      <p>
+        {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
+      </p>
+    </ion-card-content>
+  
+  
+    <ion-list>
+        <ion-item no padding>
+          <ion-icon name="contacts" item-start></ion-icon>
+            Jogadores: {{numberPlayers}}
+        </ion-item>
+  
+        <ion-item no padding>
+            <ion-icon name="calendar" item-start></ion-icon>
+            Lançamento: {{game.release_date | date: 'dd/MM/yy'}}
+          </ion-item>
+  
+        <ion-item no padding>
+            <ion-icon name="cash" item-start></ion-icon>
+            Valor: ${{game.eshop_price}}
+        </ion-item>
+  
+        <ion-item no padding>
+            <ion-icon name="game-controller-a" item-start></ion-icon>
+            Console: {{game.system}}
+        </ion-item>
+      </ion-list>
+  
+  </ion-content>
+  

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
+import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { DatabaseServiceProvider } from '../../providers/database-service/database-service';
+import { GameDetailPage } from '../game-detail/game-detail';
 
 @Component({
   selector: 'page-home',
@@ -10,18 +10,28 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class HomePage {
 
-  user = {}
-  
+  user: any = {}
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public db: DatabaseServiceProvider,
-    public afAuth: AngularFireAuth) {
-      let userFirebase = afAuth.auth.currentUser
+  constructor(public navCtrl: NavController,
+    public afAuth: AngularFireAuth,
+    public db: DatabaseServiceProvider) {
+    let userFirebase = afAuth.auth.currentUser
       db.get(userFirebase.uid).subscribe(data => {
         this.user = data
-        console.log(this.user)
       })
   }
 
+  updateFriendCode(event){
+    this.user.fc = event.target.value
+    this.db.save(this.user)
+  }
+
+  updateNickname(event){
+    this.user.nick = event.target.value
+    this.db.save(this.user)
+  }
+
+  openGameDetail(game){
+    this.navCtrl.push(GameDetailPage, game)
+  }
 }

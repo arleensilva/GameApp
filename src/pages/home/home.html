@@ -1,24 +1,43 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>
-      <img src="assets/imgs/logo-switch.png">
+      PERFIL
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="contact" item-start></ion-icon>
+      {{user.name}}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="mail" item-start></ion-icon>
+      {{user.email}}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="game-controller-a" item-start></ion-icon>
+      {{user.games?.length}} jogos na biblioteca
+    </ion-item>
+    <ion-item>
+      <ion-icon name="code-working" item-start></ion-icon>
+      <ion-input [(ngModel)]="user.fc" placeholder="Friend Code" (focusout)="updateFriendCode($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="text" item-start></ion-icon>
+      <ion-input [(ngModel)]="user.nick" placeholder="Nickname" (focusout)="updateNickname($event)" ng-touc></ion-input>
+    </ion-item>
+  </ion-list>
+<br/>
+  <ion-list>
+      <ion-list-header>
+        <ion-icon name="contacts" item-start></ion-icon>
+        Wishlist
+      </ion-list-header>
+      <ion-item *ngFor="let game of user.wishlist" (click)="openGameDetail(game)">
+        {{game.title}}
+      </ion-item>
+    </ion-list>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-  <p>
-    Teste
-    {{user.key}}
-  </p>
 </ion-content>

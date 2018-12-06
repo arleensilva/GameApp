@@ -1,0 +1,38 @@
+<!--
+  Generated template for the MyGamesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>MyGames</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  
+  
+  <ion-card *ngFor="let game of user.games">
+    <img [src]="game.front_box_art" (click)="openGameDetail(game)" />
+    <ion-card-content>
+      <h2 class="card-title">
+        {{game.title}}
+      </h2>
+      <p>
+        {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="cloud" icon-left (click)="remove(game)">
+          <ion-icon name='star'></ion-icon>
+          Remove
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

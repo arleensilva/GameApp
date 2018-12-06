@@ -9,7 +9,6 @@ import { Nintendo } from '../../model/nintendo.model';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-game-detail',
   templateUrl: 'game-detail.html',
@@ -17,11 +16,13 @@ import { Nintendo } from '../../model/nintendo.model';
 export class GameDetailPage {
 
   game: Nintendo;
+  numberPlayers: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.game = navParams.data;
-    //console.log(JSON.stringify(this.game, null, 2))
-    
+    console.log(this.game);
+    this.numberPlayers = navParams.data.number_of_players.replace(/\D/g,'');
+  
   }
 
   ionViewDidLoad() {

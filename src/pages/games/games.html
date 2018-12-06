@@ -7,50 +7,58 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
     <ion-title>Games</ion-title>
   </ion-navbar>
-  
+
 </ion-header>
 
+
 <ion-content>
-    <ion-searchbar
-      [(ngModel)]="myInput"
-      [showCancelButton]="shouldShowCancel"
-      (ionInput)="onInput($event)"
-      (ionCancel)="onCancel($event)">
+
+  <ion-searchbar
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
   </ion-searchbar>
-    <ion-card *ngFor="let game of gameList">
-      <img [src]="game.front_box_art" (click)="openGameDetail(game)" />
-      <ion-card-content>
-        <h2 class="card-title">
-          {{game.title}}
-        </h2>
-        <p>
-          {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
-        </p>
-      </ion-card-content>
-      <ion-row no-padding>
-        <ion-col>
-          <button ion-button clear small color="danger" icon-left (click)="addMyGame(game)">
-            <ion-icon name='star'></ion-icon>
-            My Games
-          </button>
-        </ion-col>
-        <ion-col text-center>
-          <button ion-button clear small color="danger" icon-left (click)="wishlist(game)">
-            <ion-icon name='musical-notes'></ion-icon>
-            Wishlist
-          </button>
-        </ion-col>
-        <ion-col text-right>
-          <button ion-button clear small color="danger" icon-left (click)="share(card)">
-            <ion-icon name='share-alt'></ion-icon>
-            Share
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+
+  <div *ngIf="searching">
+      <br><br>
+        <h5 id = "carregandoTitulo">Carregando Jogos</h5>
+        <br><br>
+      <div id = "imagemCarregamento"><img src="assets/imgs/loading0.gif"></div>  
+  </div>
+
+
+  <ion-card *ngFor="let game of gameList">
+    <img [src]="game.front_box_art" (click)="openGameDetail(game)" />
+    <ion-card-content>
+      <h2 class="card-title">
+        {{game.title}}
+      </h2>
+      <p>
+        {{(isArray(game.categories.category)) ? game.categories.category.join(' - ') : game.categories.category}}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="cloud" icon-left (click)="addMyGame(game)">
+          <ion-icon name='star'></ion-icon>
+          My Games
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-left (click)="addWishlist(game)">
+          <ion-icon name='heart'></ion-icon>
+          Wishlist
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-left (click)="share(card)">
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
